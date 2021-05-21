@@ -2,7 +2,6 @@
 export class Config{
 
     public static get port(): number {
-        console.log('inside')
         return parseInt(process.env["PORT"]);
     }
 
@@ -24,5 +23,9 @@ export class Config{
 
     public static get issuer():string{
         return process.env.ISSUER;
+    }
+
+    public static get db_uri():string{
+        return process.env.DB_URI;
     }
 }
