@@ -28,4 +28,8 @@ export class Config{
     public static get db_uri():string{
         return process.env.DB_URI;
     }
+
+    public static get system_admin_user_name():string{
+        return process.env.SYSTEM_ADMIN_USER_NAME;
+    }
 }
