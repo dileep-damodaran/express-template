@@ -7,7 +7,9 @@ export class ExpressLogHandler{
 
     public static configure(app:express.Application): express.Application{
 
-        app.use(expressWinston.logger({winstonInstance:logger}));
+        app.use(expressWinston.logger({
+            winstonInstance: logger
+        }));
         return app;
     }
 }

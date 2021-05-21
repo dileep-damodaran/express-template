@@ -1,3 +1,4 @@
+import { Config } from "../config/config";
 import { AuthenticatinResult } from "../helpers/authenticationResult";
 const JWT = require("jsonwebtoken");
 
@@ -5,7 +6,6 @@ const JWT = require("jsonwebtoken");
 export class AuthenticationService{
 
     public static authenticate(user_name:string,password:string):AuthenticatinResult{
-
 
         const user: any = '';
         const refreshToken:string = AuthenticationService.generateRefreshToken(user);
@@ -15,29 +15,25 @@ export class AuthenticationService{
         return authResult;
     }
 
-    private static generateRefreshToken(user:any):string{
-
-        const secretKey :string = '456';
+    private static generateRefreshToken(user: any): string {
 
         return JWT.sign({
             uid: '123',
             uname: 'dileep'
-        }, secretKey, {
-            issuer: 'org.com',
-            expiresIn: '1000d'
+        }, Config.refresh_token_secret_key, {
+            issuer: Config.issuer,
+            expiresIn: `${Config.refresh_token_expiry_in_hours}h`
         });
     }
 
     private static generateAccessToken(user:any):string{
 
-        const secretKey :string = '456';
-
         return JWT.sign({
             uid: '123',
             uname: 'dileep'
-        }, secretKey, {
-            issuer: 'org.com',
-            expiresIn: '5m'
+        }, Config.access_token_secret_key, {
+            issuer: Config.issuer,
+            expiresIn: `${Config.access_token_expiry_in_minutes}m`
         });
 
     }
