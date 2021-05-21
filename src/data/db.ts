@@ -25,7 +25,8 @@ export class Database{
         this._mongooseInstance = mongoose.connect(connectionString,
             { 
                 useNewUrlParser: true,
-                useUnifiedTopology: true
+                useUnifiedTopology: true,
+                useFindAndModify: false
             });
      
         return this._mongooseInstance;
