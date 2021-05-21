@@ -40,8 +40,10 @@ export class AuthenticationService{
                     return resolve(authResult);
                 }
                 else{
+                    const permissions: string[] = await UserService.getPermissions(user);
+                    
                     const refreshToken:string = AuthenticationService.generateRefreshToken(user);
-                    const accessToken: string = AuthenticationService.generateAccessToken(user);
+                    const accessToken: string = AuthenticationService.generateAccessToken(user, permissions);
                     authResult = new AuthenticationResult(true, refreshToken,accessToken, null);
             
                     return resolve(authResult);
@@ -49,6 +51,11 @@ export class AuthenticationService{
             }
         });
     }
+
+    public static validateRefreshToken(refreshToken:string):any{
+
+        return JWT.verify(refreshToken, Config.refresh_token_secret_key);
+    } 
 
     private static generateRefreshToken(user: IUserDocument): string {
 
@@ -61,12 +68,12 @@ export class AuthenticationService{
         });
     }
 
-    private static generateAccessToken(user: IUserDocument): string {
+    public static generateAccessToken(user: IUserDocument,permissions:string[]): string {
 
         return JWT.sign({
             uid: user._id,
             uname: user.user_name,
-            permissions: []
+            permissions: permissions
         }, Config.access_token_secret_key, {
             issuer: Config.issuer,
             expiresIn: `${Config.access_token_expiry_in_minutes}m`

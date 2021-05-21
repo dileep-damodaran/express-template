@@ -1,3 +1,4 @@
+import { PermissionProfile } from "../model/permissionProfile/permissionProfileDocumentSchema";
 import { IUserDocument } from "../model/user/userDocument";
 import { User } from "../model/user/userDocumentSchema";
 
@@ -11,21 +12,20 @@ export class UserService {
 
     public static async getById(id:string):Promise<IUserDocument>{
 
-        return new Promise(async(resolve,reject)=>{
-
-            const user = await User.findById(id);
-
-            return resolve(user);
-        });
+        const user = await User.findById(id);
+        return user;
     }
 
     public static async getByUserName(userName:string):Promise<IUserDocument>{
 
-        return new Promise(async(resolve,reject)=>{
+        const user = await User.findOne({ user_name: userName });
+        return user;
+    }
 
-            const user = await User.findOne({ user_name: userName });
+    public static async getPermissions(user:IUserDocument):Promise<any>{
 
-            return resolve(user);
-        });
+        let x = await PermissionProfile.findOne({ name: user.permission_profile });
+        const userPermissions = x && x.permissions ? x.permissions : []
+        return userPermissions;
     }
 }

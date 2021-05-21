@@ -14,6 +14,7 @@ export class AuthenticationHandler{
         unless({
             path:[
                 new RegExp("/api/account/login", "i"),
+                new RegExp("/api/account/token", "i"),
             ]
         }));
 

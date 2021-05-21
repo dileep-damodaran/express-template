@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { AccountController } from '../controllers/account/accountController';
+import { AccountController } from '../routes/account/account.manage.route';
 
 
 export class RouteHandler{
