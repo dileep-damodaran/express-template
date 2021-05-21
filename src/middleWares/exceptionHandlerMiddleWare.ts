@@ -5,7 +5,12 @@ export class ExceptionHandler{
 
     public static configure(app: express.Application){
 
+        console.log("Configuring ExceptionHandler..");
+
         app.use((err:any,req: express.Request, res: express.Response, next: express.NextFunction)=>{
+
+
+            console.log(`isBoom : ${err.isBoom}`);
 
             if (err.isBoom) {
 
@@ -26,5 +31,8 @@ export class ExceptionHandler{
                 return res.status(err.status || 500).send(formattedResponse);
             }
         });
+
+        console.log("Exception handler configured successfully.");
+        return app;
     }
 }

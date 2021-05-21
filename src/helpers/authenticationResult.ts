@@ -1,15 +1,17 @@
 
 
-export class AuthenticatinResult{
+export class AuthenticationResult{
 
-    private _authenticated : boolean;
-    private _accessToken : string;
-    private refreshToken : string;
+    public  authenticated : boolean;
+    public  refreshToken : string;
+    public  accessToken : string;
+    public  error : string;
 
-    constructor(authenticated : boolean,accessToken : string,refreshToken : string) {
-        this._authenticated = authenticated;
-        this._accessToken = accessToken;
+    constructor(authenticated : boolean,refreshToken : string,accessToken : string,error:string) {
+        this.authenticated = authenticated;
         this.refreshToken = refreshToken;
+        this.accessToken = accessToken;
+        this.error = error;
 
     }
 }

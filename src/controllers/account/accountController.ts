@@ -3,6 +3,7 @@
 import * as express from "express";
 import asyncMiddleWare from "../../middleWares/asyncMiddleWare";
 import { AuthenticationService } from "../../services/authenticationService";
+const boom = require("boom");
 
 
 export class AccountController{
@@ -11,9 +12,18 @@ export class AccountController{
 
         let router = express.Router();
 
-        router.get('/login', asyncMiddleWare(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-            const authResult = AuthenticationService.authenticate('','');
+        router.post('/login', asyncMiddleWare(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+
+            const userName = req.body.user_name;
+            const password = req.body.password;
+
+            const authResult = await AuthenticationService.authenticate(userName, password);
+
+            if(!authResult.authenticated)
+                throw boom.unauthorized(authResult.error);
+
             res.status(200).send(authResult);
+
         }));
 
         router.get('/', asyncMiddleWare(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
