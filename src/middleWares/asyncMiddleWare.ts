@@ -6,7 +6,6 @@ const asyncMiddleWare:any = (fn:any) =>
 
     Promise.resolve(fn(req, res, next))
         .catch((err) => {
-            console.log('inside asynd cathc');
             next(err);
         });
 };

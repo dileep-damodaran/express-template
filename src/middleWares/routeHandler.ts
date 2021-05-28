@@ -11,6 +11,7 @@ export class RouteHandler{
         app.use("/api/account", AccountController.routes(app));
         
         console.log("RouteHandler configured successfully.");
+
         return app;
     }
 }

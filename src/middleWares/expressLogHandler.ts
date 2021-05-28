@@ -1,6 +1,6 @@
 
 import * as express from 'express';
-import logger from './../helpers/logger';
+import logger from '../helpers/logger';
 const expressWinston = require('express-winston');
 
 export class ExpressLogHandler{

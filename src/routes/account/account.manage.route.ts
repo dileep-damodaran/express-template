@@ -2,12 +2,11 @@
 
 import * as express from "express";
 import asyncMiddleWare from "../../middleWares/asyncMiddleWare";
-import { createValidator  } from 'express-joi-validation';
 import { AuthenticationService } from "../../services/authenticationService";
 import { UserService } from "../../services/userService";
 import { AccountBindingSchema } from "./account.manage.bindModel";
 const boom = require("boom");
-const validator = createValidator();
+const { celebrate} = require('celebrate');
 
 
 
@@ -17,7 +16,7 @@ export class AccountController{
 
         let router = express.Router();
 
-        router.post('/login',validator.body(AccountBindingSchema.login), asyncMiddleWare(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+        router.post('/login',celebrate(AccountBindingSchema.login), asyncMiddleWare(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
 
             const userName = req.body.user_name;
             const password = req.body.password;
@@ -31,7 +30,7 @@ export class AccountController{
 
         }));
 
-        router.post('/token',validator.body(AccountBindingSchema.token), asyncMiddleWare(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+        router.post('/token',celebrate(AccountBindingSchema.token), asyncMiddleWare(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
 
             const refreshToken = req.body.refresh_token;
 
@@ -60,7 +59,6 @@ export class AccountController{
         }));
 
         router.get('/', asyncMiddleWare(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-            
             res.status(200).send('success');
         }));
 
