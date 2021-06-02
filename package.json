@@ -4,7 +4,9 @@
     "description": "",
     "main": "index.js",
     "scripts": {
+        "start": "node ./dist/server.js",
         "dev": "cross-env NODE_ENV=development ENVIRONMENT=development nodemon --inspect ./dist/server.js",
+        "prod": "cross-env NODE_ENV=production ENVIRONMENT=production node ./dist/server.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "",
