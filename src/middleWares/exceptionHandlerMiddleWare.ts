@@ -1,12 +1,13 @@
 import * as express from 'express';
 import { isCelebrateError } from 'celebrate';
 import { FormattedResponse } from '../helpers/formattedResponse';
+import logger from '../helpers/logger';
 
 export class ExceptionHandler {
 
     public static configure(app: express.Application) {
 
-        console.log("Configuring ExceptionHandler..");
+        logger.info("[CONFIGURATION] [STARTED] : ExceptionHandler");
 
         app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
 
@@ -54,7 +55,7 @@ export class ExceptionHandler {
             }
         });
 
-        console.log("Exception handler configured successfully.");
+        logger.info("[CONFIGURATION] [COMPLETED] : ExceptionHandler");
         return app;
     }
 }

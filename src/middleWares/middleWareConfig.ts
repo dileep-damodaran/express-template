@@ -1,6 +1,7 @@
 
 import * as express from 'express';
 import { Config } from '../config/config';
+import logger from '../helpers/logger';
 import { AuthenticationHandler } from './authenticationHandler';
 import { CustomResponseHandler } from './customResponseHandler';
 import { ExceptionHandler } from './exceptionHandlerMiddleWare';
@@ -20,6 +21,8 @@ export class MiddleWareConfig {
 
     public configure(): express.Application {
 
+        logger.info("[CONFIGURATION] [STARTED] : MiddleWareConfig");
+        
         ExpressLogHandler.configure(this._app);
 
         ExpressHandler.load(this._app);
@@ -31,6 +34,8 @@ export class MiddleWareConfig {
         RouteHandler.configure(this._app);
 
         ExceptionHandler.configure(this._app);
+
+        logger.info("[CONFIGURATION] [COMPLETED] : MiddleWareConfig");
 
         return this._app;
     }

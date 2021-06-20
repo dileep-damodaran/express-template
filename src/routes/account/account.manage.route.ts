@@ -1,7 +1,7 @@
 
 
 import * as express from "express";
-import asyncMiddleWare from "../../middleWares/asyncMiddleWare";
+import asyncMiddleWare from "../../middlewares/asyncMiddleWare";
 import { AuthenticationService } from "../../services/authenticationService";
 import { UserService } from "../../services/userService";
 import { AccountBindingSchema } from "./account.manage.bindModel";

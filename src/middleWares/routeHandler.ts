@@ -1,4 +1,5 @@
 import * as express from 'express';
+import logger from '../helpers/logger';
 import { AccountController } from '../routes/account/account.manage.route';
 
 
@@ -6,11 +7,11 @@ export class RouteHandler{
 
     public static configure(app:express.Application):express.Application{
 
-        console.log("RouteHandler ExpressLogHandler..");
+        logger.info("[CONFIGURATION] [STARTED] : RouteHandler");
 
         app.use("/api/account", AccountController.routes(app));
         
-        console.log("RouteHandler configured successfully.");
+        logger.info("[CONFIGURATION] [COMPLETED] : RouteHandler");
 
         return app;
     }

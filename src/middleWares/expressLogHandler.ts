@@ -7,13 +7,13 @@ export class ExpressLogHandler{
 
     public static configure(app:express.Application): express.Application{
 
-        console.log("Configuring ExpressLogHandler..");
+        logger.info("[CONFIGURATION] [STARTED] : ExpressLogHandler");
 
         app.use(expressWinston.logger({
             winstonInstance: logger
         }));
 
-        console.log("ExpressLogHandler configured successfully.");
+        logger.info("[CONFIGURATION] [COMPLETED] : ExpressLogHandler");
         return app;
     }
 }
