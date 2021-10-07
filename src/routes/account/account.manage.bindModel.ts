@@ -1,6 +1,6 @@
-const {  Joi, Segments } = require('celebrate');
+const { Joi, Segments } = require('celebrate');
 export class AccountBindingSchema {
-    
+
     public static login =
         {
             [Segments.BODY]: Joi.object().keys({
